@@ -5,7 +5,7 @@ defineProps<{ event: Event }>();
 </script>
 
 <template>
-  <div class="event-card">
+  <div class="event-class">
     <div class="event-card">
       <h2>{{ event.title }}</h2>
       <p>{{ event.time }} on {{ event.date }}</p>
