@@ -12,6 +12,6 @@ const events = ref([
 
 <template>
   <div>
-<EventCard v-for="event in events" :key="event.id" />
+<EventCard v-for="event in events" :key="event.id" :name="event.name" />
 </div>
 </template>

@@ -1,8 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+withDefaults(defineProps<{ name: string }>(), {
+  name: 'default name',
+})
+</script>
 
 <template>
   <div class="event-card">
-    <h1>This is an event page</h1>
+    <h1>This is an {{ name }} page</h1>
   </div>
 </template>
 
@@ -14,6 +18,7 @@
   border: 1px solid #39495c;
   margin-bottom: 18px;
 }
+
 .event-card:hover {
   transform: scale(1.01);
   box-shadow: 0 3px 12px 0 rgba (0, 0, 0, 0.2);
