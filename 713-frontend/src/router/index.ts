@@ -11,9 +11,10 @@ const router = createRouter({
       component: EventListView,
     },
     {
-      path: '/event/:12',
+      path: '/event/:id',
       name: 'event-detail-view',
       component: EventDetailView,
+      props: true,
     },
     {
       path: '/about',
