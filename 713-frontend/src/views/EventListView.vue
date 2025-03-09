@@ -4,6 +4,8 @@ import EventCard from '@/components/EventCard.vue'
 import eventService from '@/services/EventService'
 import { ref, computed, watchEffect } from 'vue'
 import type { Event } from '@/types'
+import { useRouter} from 'vue-router'
+const router = useRouter()
 const events = ref<Event[]>([])
 const totalEvents = ref(0)
 
@@ -23,8 +25,8 @@ watchEffect(() => {
     events.value = response.data
     totalEvents.value = response.headers['x-total-count']
   })
-  .catch((error: Error) => {
-    console.error('There was an error!', error)
+  .catch(() => {
+    router.push({ name: 'network-error-view'})
   })
 })
 
