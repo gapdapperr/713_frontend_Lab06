@@ -19,7 +19,8 @@ const router = createRouter({
       component: EventListView,
       props: (route) => ({
         page: parseInt(route.query.page as string) || 1,
-    })},
+      }),
+    },
     {
       path: '/event/:id',
       name: 'event-layout-view',
@@ -58,7 +59,8 @@ const router = createRouter({
           name: 'event-edit-view',
           component: EventEditView,
           props: true,
-        }]
+        },
+      ],
     },
 
     {
@@ -72,7 +74,7 @@ const router = createRouter({
     {
       path: '/networ-error',
       name: 'network-error-view',
-      component: NetworkErrorView
+      component: NetworkErrorView,
     },
     {
       path: '/404/:resource',
@@ -83,10 +85,15 @@ const router = createRouter({
     {
       path: '/:catchAll(.*)',
       name: 'not-found',
-      component: NotFoundView
-    }
+      component: NotFoundView,
+    },
   ],
+  scrollBehavior() {
+    return { top: 0}
+  }
 })
+
+
 
 router.beforeEach(() => {
   nProgress.start()
