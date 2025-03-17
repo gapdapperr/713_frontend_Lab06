@@ -1,28 +1,28 @@
 export interface Event {
-    id: number;
-    category: string;
-    title: string;
-    description: string;
-    location: string;
-    date: string;
-    time: string;
-    petsAllowed: boolean;
-    // organizerId: number | null;
-    organizer?: Organizer | null;
-    participants?: Participant[];
-  }
+  id: number
+  category: string
+  title: string
+  description: string
+  location: string
+  date: string
+  time: string
+  petsAllowed: boolean
+  // organizerId: number | null;
+  organizer?: Organizer | null
+  participants?: Participant[]
+}
 
-  export type Organizer = {
-    id?: number;
-    name: string;
-    events?: Event[];
-  };
+export type Organizer = {
+  id?: number
+  name: string
+  events?: Event[]
+}
 
-  export interface Participant{
-    id?:number
-    name: string
-    email: string
-    events: Event[]
+export interface Participant {
+  id?: number
+  name: string
+  email: string
+  events: Event[]
 }
 
 export interface MessageState {
@@ -31,4 +31,11 @@ export interface MessageState {
 
 export interface EventState {
   event: Event | null
+}
+
+export type User = {
+  id?: number
+  username: string
+  events: Event[]
+  roles: string[]
 }

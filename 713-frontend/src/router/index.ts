@@ -10,6 +10,7 @@ import LoginView from '@/views/LoginView.vue'
 import nProgress from 'nprogress'
 import { useEventStore } from '@/stores/event'
 import EventService from '@/services/EventService'
+import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -60,6 +61,15 @@ const router = createRouter({
           name: 'event-edit-view',
           component: EventEditView,
           props: true,
+          beforeEnter: () => {
+            const authStore = useAuthStore()
+            if (!authStore.isAdmin) {
+              return {
+                name: '404-resource-view',
+                params: { resource: 'you are not allowed to access' },
+              }
+            }
+          },
         },
       ],
     },
