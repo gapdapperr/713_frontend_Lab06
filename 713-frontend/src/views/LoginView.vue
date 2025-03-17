@@ -3,6 +3,8 @@ import InputText from '@/components/InputText.vue'
 import * as yup from 'yup'
 // import { ref } from 'vue'
 import { useField, useForm } from 'vee-validate'
+import { useAuthStore } from '@/stores/auth'
+const authStore = useAuthStore()
 const validationSchema = yup.object({
   email: yup.string().required('The email is required').email('Input must be an email.'),
   password: yup
@@ -19,15 +21,17 @@ const { errors, handleSubmit } = useForm({
 })
 const { value: email } = useField<string>('email')
 const { value: password } = useField<string>('password')
-const onSubmit = handleSubmit((values) => {
-  console.log(values)
+const onSubmit = handleSubmit(async (values) => {
+  try {
+    const response = await authStore.login(values.email, values.password)
+    console.log(response.data.access_token)
+  } catch {
+    console.log('unauthorized')
+  }
 })
-
 </script>
 
 <template>
-
-
   <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <img
@@ -40,19 +44,18 @@ const onSubmit = handleSubmit((values) => {
       </h2>
     </div>
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6" @submit.prevent="onSubmit">
+      <form class="space-y-6" @submit.prevent="onSubmit">
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900"
             >Email address</label
           >
-                    <InputText
+          <InputText
             id="email"
             type="email"
             v-model="email"
             placeholder="Email address"
             :error="errors['email']"
           />
-
         </div>
         <div>
           <div class="flex items-center justify-between">
@@ -65,14 +68,13 @@ const onSubmit = handleSubmit((values) => {
               >
             </div>
           </div>
-                    <InputText
+          <InputText
             type="password"
             v-model="password"
             placeholder="Password"
             :error="errors['password']"
-	autocomplete="false"
+            autocomplete="false"
           />
-
         </div>
         <div>
           <button
