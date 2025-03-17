@@ -20,6 +20,7 @@ export const useAuthStore = defineStore('auth', {
         password: password,
       })
       this.token = response.data.access_token
+      localStorage.setItem('token', this.token as string)
       return response
     },
   },
