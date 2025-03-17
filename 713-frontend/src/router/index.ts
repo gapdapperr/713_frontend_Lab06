@@ -6,6 +6,7 @@ import EventEditView from '@/views/event/EditView.vue'
 import EventLayoutView from '@/views/event/LayoutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import NetworkErrorView from '@/views/event/NetworkErrorView.vue'
+import LoginView from '@/views/LoginView.vue'
 import nProgress from 'nprogress'
 import { useEventStore } from '@/stores/event'
 import EventService from '@/services/EventService'
@@ -72,6 +73,12 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
     },
     {
+      path: '/login',
+      name: 'login',
+      component: LoginView,
+    },
+
+    {
       path: '/networ-error',
       name: 'network-error-view',
       component: NetworkErrorView,
@@ -94,11 +101,8 @@ const router = createRouter({
     } else {
       return { top: 0 }
     }
-    
-  }
+  },
 })
-
-
 
 router.beforeEach(() => {
   nProgress.start()
